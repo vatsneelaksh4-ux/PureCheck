@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Butter Test | PureCheck</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#0f172a;
+    --sub:#64748b;
+    --accent:#22c55e;
+    --shadow:0 15px 40px rgba(0,0,0,.12);
+}
+
+body.dark{
+    --bg:#0f172a;
+    --card:#1e293b;
+    --text:#f8fafc;
+    --sub:#cbd5e1;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:var(--bg);
+    padding:20px;
+    transition:.3s;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+}
+
+.back-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:var(--accent);
+    color:white;
+    padding:12px 20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.theme-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:1.2rem;
+    background:rgba(34,197,94,.15);
+}
+
+.card{
+    background:var(--card);
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+.content{
+    padding:30px;
+}
+
+h1{
+    color:var(--text);
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:var(--sub);
+    margin-bottom:25px;
+}
+
+.section{
+    margin-bottom:25px;
+}
+
+.section h2{
+    color:var(--text);
+    margin-bottom:10px;
+}
+
+.section p,
+.section li{
+    color:var(--sub);
+    line-height:1.8;
+}
+
+.answer-btn{
+    border:none;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    margin-right:10px;
+    margin-top:10px;
+    transition:.3s;
+}
+
+.answer-btn:hover{
+    transform:translateY(-2px);
+}
+
+.yes-btn{
+    background:#ef4444;
+    color:white;
+}
+
+.no-btn{
+    background:#22c55e;
+    color:white;
+}
+
+#resultBox{
+    display:none;
+    margin-top:20px;
+    padding:18px;
+    border-radius:15px;
+    font-weight:600;
+    line-height:1.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
+🌙
+</button>
+
+<div class="container">
+
+<a href="foods.html" class="back-btn">
+← Back to Foods
+</a>
+
+<div class="card">
+
+<img src="butter.jpeg" alt="Butter">
+
+<div class="content">
+
+<h1>🧈 Butter</h1>
+
+<p class="subtitle">
+Detection of Starch Adulteration in Butter
+</p>
+
+<div class="section">
+<h2>Possible Adulterant</h2>
+<p>Starch</p>
+</div>
+
+<div class="section">
+<h2>Materials Required</h2>
+<ul>
+<li>Butter sample</li>
+<li>Iodine solution</li>
+<li>Clean container</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Procedure</h2>
+<ol>
+<li>Take a small amount of butter in a clean container.</li>
+<li>Add 2–3 drops of iodine solution.</li>
+<li>Observe any colour change carefully.</li>
+</ol>
+</div>
+
+<div class="section">
+<h2>Observation</h2>
+
+<p>
+Did a blue-black colour appear after adding iodine solution?
+</p>
+
+<button class="answer-btn yes-btn" onclick="showResult(true)">
+Yes
+</button>
+
+<button class="answer-btn no-btn" onclick="showResult(false)">
+No
+</button>
+
+<div id="resultBox"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const body = document.body;
+const btn = document.getElementById("themeBtn");
+
+if(localStorage.getItem("theme") === "dark"){
+    body.classList.add("dark");
+    btn.innerHTML = "☀️";
+}
+
+function toggleTheme(){
+
+    body.classList.toggle("dark");
+
+    if(body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+        btn.innerHTML = "☀️";
+    }
+    else{
+        localStorage.setItem("theme","light");
+        btn.innerHTML = "🌙";
+    }
+
+}
+
+function showResult(isAdulterated){
+
+    const result = document.getElementById("resultBox");
+
+    result.style.display = "block";
+
+    if(isAdulterated){
+
+        result.style.background = "#fee2e2";
+        result.style.color = "#991b1b";
+
+        result.innerHTML =
+        "⚠️ Adulteration Detected<br><br>" +
+        "The appearance of a blue-black colour indicates the presence of starch in the butter sample.";
+
+    }
+    else{
+
+        result.style.background = "#dcfce7";
+        result.style.color = "#166534";
+
+        result.innerHTML =
+        "✅ Sample Appears Pure<br><br>" +
+        "No blue-black colour was observed. Starch adulteration was not detected.";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

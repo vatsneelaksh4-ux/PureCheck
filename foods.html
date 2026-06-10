@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Select Food Sample | PureCheck</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#0f172a;
+    --sub:#64748b;
+    --shadow:0 15px 40px rgba(0,0,0,0.12);
+    --accent:#22c55e;
+}
+
+body.dark{
+    --bg:#0f172a;
+    --card:#1e293b;
+    --text:#f8fafc;
+    --sub:#cbd5e1;
+    --shadow:0 15px 40px rgba(0,0,0,0.45);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:var(--bg);
+    min-height:100vh;
+    transition:.3s;
+}
+
+.header{
+    padding:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h1{
+    color:var(--text);
+}
+
+.theme-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:1.1rem;
+    background:rgba(34,197,94,.15);
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:0 20px 40px;
+}
+
+.back-btn{
+    margin-bottom:20px;
+    display:inline-block;
+    text-decoration:none;
+    color:white;
+    background:var(--accent);
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.search{
+    width:100%;
+    padding:15px 20px;
+    border:none;
+    border-radius:15px;
+    margin-bottom:25px;
+    font-size:1rem;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:var(--shadow);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:var(--card);
+    border-radius:24px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.info{
+    padding:18px;
+}
+
+.info h3{
+    color:var(--text);
+    margin-bottom:8px;
+}
+
+.info p{
+    color:var(--sub);
+    font-size:.9rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>🧪 Select Food Sample</h1>
+
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
+        🌙
+    </button>
+
+</div>
+
+<div class="container">
+
+    <a href="index.html" class="back-btn">
+        ← Home
+    </a>
+
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="Search food item..."
+        onkeyup="filterCards()"
+    >
+
+    <div class="grid">
+
+        <div class="card" onclick="location.href='butter.html'" data-name="butter">
+            <img src="butter.jpeg" alt="Butter">
+            <div class="info">
+                <h3>🧈 Butter</h3>
+                <p>Check for starch adulteration.</p>
+            </div>
+        </div>
+
+        <div class="card" onclick="location.href='ghee.html'" data-name="ghee">
+            <img src="ghee.jpeg" alt="Ghee">
+            <div class="info">
+                <h3>🥛 Ghee</h3>
+                <p>Check for vanaspati adulteration.</p>
+            </div>
+        </div>
+
+        <div class="card" onclick="location.href='oil.html'" data-name="oil">
+            <img src="oil.jpeg" alt="Oil">
+            <div class="info">
+                <h3>🫒 Cooking Oil</h3>
+                <p>Check for argemone oil.</p>
+            </div>
+        </div>
+
+        <div class="card" onclick="location.href='sugar.html'" data-name="sugar">
+            <img src="sugar.jpeg" alt="Sugar">
+            <div class="info">
+                <h3>🍬 Sugar</h3>
+                <p>Check for chalk powder.</p>
+            </div>
+        </div>
+
+        <div class="card" onclick="location.href='turmeric.html'" data-name="turmeric">
+            <img src="turmeric.jpeg" alt="Turmeric">
+            <div class="info">
+                <h3>🌿 Turmeric Powder</h3>
+                <p>Check for metanil yellow.</p>
+            </div>
+        </div>
+
+        <div class="card" onclick="location.href='chilli.html'" data-name="chilli">
+            <img src="chillipowder.jpeg" alt="Chilli Powder">
+            <div class="info">
+                <h3>🌶️ Chilli Powder</h3>
+                <p>Check for artificial colours.</p>
+            </div>
+        </div>
+
+        <div class="card" onclick="location.href='blackpepper.html'" data-name="black pepper">
+            <img src="blackpepper.jpeg" alt="Black Pepper">
+            <div class="info">
+                <h3>⚫ Black Pepper</h3>
+                <p>Check for papaya seeds.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const body = document.body;
+const themeBtn = document.getElementById("themeBtn");
+
+if(localStorage.getItem("theme") === "dark"){
+    body.classList.add("dark");
+    themeBtn.innerHTML = "☀️";
+}
+
+function toggleTheme(){
+
+    body.classList.toggle("dark");
+
+    if(body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+        themeBtn.innerHTML="☀️";
+    }
+    else{
+        localStorage.setItem("theme","light");
+        themeBtn.innerHTML="🌙";
+    }
+
+}
+
+function filterCards(){
+
+    let input =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+    let cards =
+    document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+
+        let name =
+        card.dataset.name;
+
+        if(name.includes(input)){
+            card.style.display="block";
+        }
+        else{
+            card.style.display="none";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
